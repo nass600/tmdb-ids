@@ -1,0 +1,45 @@
+{
+    "name": "Tmdb Ids",
+    "version": "1.0.0",
+    "description": "Chrome extension for easily displaying and copying tmdb movie ids",
+    "manifest_version": 2,
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": true
+    },
+    "browser_action": {
+        "default_title": "Winston",
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128": "logo.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.themoviedb.org/*"
+            ],
+            "css": [],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
+    "web_accessible_resources": [
+        "*.png",
+        "*.svg",
+        "options.html"
+    ],
+    "icons": {
+        "128": "logo.png"
+    },
+    "permissions": [
+        "tabs"
+    ]
+}

@@ -1,0 +1,17 @@
+.imdb-id {
+    opacity: 0.2;
+    font-weight: 400;
+    cursor: pointer;
+    margin-left: 6px;
+    transition: all 0.2s ease-in-out;
+
+    &.active {
+        color: #28BAD2 !important;
+        opacity: 1;
+    }
+
+    &.hover:not(.active) {
+        color: inherit;
+        opacity: 1;
+    }
+}
