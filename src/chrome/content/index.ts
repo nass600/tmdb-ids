@@ -1,6 +1,7 @@
 import '@styles/styles.scss'
 
-const DETAIL_URL = 'https://www.themoviedb.org/movie'
+const DETAIL_MOVIE_URL = 'https://www.themoviedb.org/movie'
+const DETAIL_TV_URL = 'https://www.themoviedb.org/tv'
 const SEARCH_URL = 'https://www.themoviedb.org/search'
 
 /**
@@ -59,7 +60,7 @@ const renderTmdbId = (container: Element, id: number) => {
 
 const currentUrl = window.location.toString()
 
-if (currentUrl.startsWith(DETAIL_URL)) {
+if (currentUrl.startsWith(DETAIL_MOVIE_URL) || currentUrl.startsWith(DETAIL_TV_URL)) {
     const id = getTmdbIdFromUrl()
     const container = document.querySelector('section.header .title h2')
 
@@ -67,7 +68,7 @@ if (currentUrl.startsWith(DETAIL_URL)) {
         renderTmdbId(container, id)
     }
 } else if (currentUrl.startsWith(SEARCH_URL)) {
-    const results = document.querySelectorAll('[id^="card_movie_"]')
+    const results = document.querySelectorAll('[id^="card_"]')
 
     results.forEach((element) => {
         const id = getTmdbIdFromElement(element)
