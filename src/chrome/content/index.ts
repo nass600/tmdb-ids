@@ -42,6 +42,26 @@ const copyTmdbId = (event: PointerEvent): void => {
 }
 
 /**
+ * Copies the whole title
+ *
+ * @param event {PointerEvent}
+ */
+const copyFullTitle = (event: PointerEvent): void => {
+    event.preventDefault()
+    event.stopPropagation()
+    const element = event.target as HTMLElement
+    if (element === null || element === undefined) {
+        return
+    }
+    const title = element.parentNode?.children[0].textContent
+    const year = element.parentNode?.children[1].textContent
+    const tmdbId = element.parentNode?.children[2].textContent
+
+    navigator.clipboard.writeText(`${title} ${year} ${tmdbId}`)
+    element.classList.add('active')
+}
+
+/**
  * Renders the tmdb id in the container element
  *
  * @param container {Element}
@@ -58,6 +78,22 @@ const renderTmdbId = (container: Element, id: number) => {
     idElement.addEventListener('mouseleave', () => idElement.classList.toggle('hover'))
 }
 
+/**
+ * Renders a button to copy the full media title
+ *
+ * @param container {Element}
+ */
+const renderCopyButton = (container: Element) => {
+    const idElement = document.createElement('img')
+    idElement.className = 'tag imdb-copy'
+    idElement.src = chrome.extension.getURL('copy.png')
+    container?.append(idElement)
+
+    idElement.addEventListener('click', copyFullTitle)
+    idElement.addEventListener('mouseover', () => idElement.classList.toggle('hover'))
+    idElement.addEventListener('mouseleave', () => idElement.classList.toggle('hover'))
+}
+
 const currentUrl = window.location.toString()
 
 if (currentUrl.startsWith(DETAIL_MOVIE_URL) || currentUrl.startsWith(DETAIL_TV_URL)) {
@@ -66,6 +102,7 @@ if (currentUrl.startsWith(DETAIL_MOVIE_URL) || currentUrl.startsWith(DETAIL_TV_U
 
     if (container) {
         renderTmdbId(container, id)
+        renderCopyButton(container)
     }
 } else if (currentUrl.startsWith(SEARCH_URL)) {
     const results = document.querySelectorAll('[id^="card_"]')

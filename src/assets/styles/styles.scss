@@ -15,3 +15,25 @@
         opacity: 1;
     }
 }
+
+section.header .title h2 {
+    &:hover .imdb-copy {
+        display: inline-block;
+    }
+}
+
+.imdb-copy {
+    display: none;
+    vertical-align: middle;
+    cursor: pointer;
+    width: auto;
+    height: 22px;
+    margin-left: 12px;
+    opacity: 0.2;
+    transition: all 0.2s ease-in-out;
+
+    &.hover {
+        color: inherit;
+        opacity: 1;
+    }
+}
